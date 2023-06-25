@@ -1,7 +1,11 @@
 steps:
-  - name: bash
-    args: ['./UI/myscript.bash']
-  - name: gcr.io/project-id/firebase
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install', '-g', '@angular/cli']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build', '--', '--prod=true']
+  - name: gcr.io/glass-approach-204914/firebase
     args: ['deploy', '--project=glass-approach-204914', '--only=hosting']
 
 options:
