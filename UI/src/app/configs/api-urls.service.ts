@@ -19,6 +19,7 @@ export class ApiurlsService {
   searchUrl!: string;
   streamingSearchUrl!: string;
   sourcesUrl!: string;
+  stackOverflowUrl!: string;
 
   constructor() {
     this.loadUrls();
@@ -27,6 +28,7 @@ export class ApiurlsService {
   loadUrls(): void {
     this.streamingSearchUrl = `${this.baseUrl}/stream-create-code-completions/chat-gpt`;
     this.searchUrl = `${this.baseUrl}${this.version}/llm`;
-    this.sourcesUrl = `${this.googleBaseUrl}?key=${this.googleKey}&cx=${this.googleCx}`;
+    this.sourcesUrl = `${this.googleBaseUrl}?key=${this.googleKey}&cx=${this.googleCx}&num=5`;
+    this.stackOverflowUrl = `${this.baseUrl}/top_answers_for_query`;
   }
 }

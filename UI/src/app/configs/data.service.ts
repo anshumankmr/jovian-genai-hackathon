@@ -23,6 +23,7 @@ export class DataService {
     const headerOptions = new HttpHeaders({
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(this.url.username + ":" + this.url.password)
     });
     return this.http
       .post(url, data, { headers: headerOptions })

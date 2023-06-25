@@ -27,6 +27,7 @@ export class SearchComponent {
   queryText: string = "";
   routeSubscription!: Subscription;
   sourceSubscription!: Subscription;
+  SOSubscription!: Subscription;
 
   sourceDataLoading = 'loading';
   searchDataLoading = 'loading';
@@ -34,6 +35,7 @@ export class SearchComponent {
 
   sourcesDataList!: any[];
   streamedData: any = [];
+  SODataList: any = [];
 
   constructor(private activatedroute: ActivatedRoute,
     private route: Router,
@@ -52,6 +54,7 @@ export class SearchComponent {
 
         this.getMainSearchResults();
         this.getSources();
+        this.getSOSources();
       });
   }
 
@@ -89,6 +92,7 @@ export class SearchComponent {
 
 
   getSources(): void {
+    this.sourceDataLoading = 'loading';
     this.sourceSubscription = this.dataService.get(`${this.urls.sourcesUrl}&q=${this.queryText}`)
       .subscribe({
         next: (data) => {
@@ -99,5 +103,28 @@ export class SearchComponent {
           this.sourceDataLoading = 'error';
         }
       });
+  }
+
+  getSOSources(): void {
+    this.stackOverflowDataLoading = "loading";
+    let data = {
+      query: this.queryText
+    };
+    this.SOSubscription = this.dataService.post(`${this.urls.stackOverflowUrl}`, data)
+      .subscribe({
+        next: (data) => {
+          this.stackOverflowDataLoading = 'data';
+          this.SODataList = data;
+        },
+        error: (error) => {
+          this.stackOverflowDataLoading = 'error';
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.SOSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
+    this.sourceSubscription.unsubscribe();
   }
 }

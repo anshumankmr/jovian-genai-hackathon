@@ -29,7 +29,30 @@
 
       <!-- Sources -->
       <div class="col-12 col-lg-5">
-        <h2 class="sources_title">SOURCES</h2>
+
+        <!-- Stack Overflow search -->
+        <h2 class="sources_title">Stack Overflow</h2>
+        <div class="source_data--container">
+          <mat-card *ngIf="stackOverflowDataLoading === 'data'" class="sources_data--items mb-2 animate_animated animate_fadeInUp p-3">
+            <a *ngFor="let sourceItem of SODataList" [href]="'https://stackoverflow.com/questions/' + sourceItem.question_id" target="_blank">
+              <h3 [innerHTML]="sourceItem.question_title"></h3>
+            </a>
+            <!-- <p [innerHTML]="sourceItem.body"></p> -->
+          </mat-card>
+
+          <!-- Placeholder loading -->
+          <ng-container *ngIf="stackOverflowDataLoading === 'loading'">
+            <mat-card class="p-4 sources_data--items mb-2 animate_animated animate_fadeInUp placeholder-glow">
+              <span class="placeholder col-8"></span>
+              <span class="placeholder col-6 mt-1"></span>
+              <span class="placeholder col-8 mt-1"></span>
+            </mat-card>
+          </ng-container>
+        </div>
+
+
+        <!-- Google searches -->
+        <h2 class="sources_title">Google Search</h2>
 
         <div class="source_data--container">
           <mat-card class="sources_data--items mb-2 animate_animated animate_fadeInUp p-3"
@@ -55,3 +78,6 @@
     </div>
   </div>
 </div>
+
+
+<app-footer [isFixed]="false"></app-footer>
