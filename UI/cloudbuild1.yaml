@@ -1,12 +1,6 @@
 steps:
-  - name: gcr.io/cloud-builders/gcloud
-    args:
-      - '-c'
-      - >-
-        gcloud run deploy merlinapp --source . --region=asia-southeast2
-        --max-instances=5
-        --allow-unauthenticated
-        --port 4200
-    entrypoint: /bin/bash
+  - name: bash
+    args: ['./myscript.bash']
+
 options:
   logging: CLOUD_LOGGING_ONLY
