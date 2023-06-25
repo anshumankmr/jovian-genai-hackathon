@@ -24,7 +24,7 @@ def verify_password(username, password):
 
 
 def stream(input_text, system_prompt):
-        completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[
+        completion = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k", messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"{input_text}"},
         ], stream=True, temperature=0)
