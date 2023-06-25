@@ -1,0 +1,12 @@
+@import "../../../variable";
+
+.header-spacer {
+  flex: 1 1 auto;
+}
+
+.brand-small-logo {
+  font-weight: bold;
+  font-family: $logo-font;
+  color: $primary-color;
+  text-decoration: none;
+}

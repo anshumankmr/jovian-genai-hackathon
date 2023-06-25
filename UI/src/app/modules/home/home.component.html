@@ -1,0 +1,40 @@
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="col-12 col-lg-6 h-100 d-flex flex-column justify-content-center">
+      <div>
+        <!-- hero component -->
+        <div class="brand mx-5 animate__animated animate__slideInUp">
+          <h1 class="brand-logo">MERLIN</h1>
+          <p class="brand-title">A magical developer tool.</p>
+
+          <p class="brand-detail">A comprehensive solution to all the challenges faced by developers: generating code, writing unit tests, and documentation.</p>
+
+          <div class="d-flex align-items-center my-4">
+            <a class="main-link" routerLink="/documentation">
+              Documentation</a>
+            <a class="main-link mx-3" routerLink="/unit-test">Unit Tests</a>
+          </div>
+        </div>
+
+        <!-- Main search component -->
+        <div class="main-search mx-5 mt-5 animate__animated animate__slideInUp">
+          <form action="">
+            <div class="d-flex align-items-center">
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput placeholder="Ask anything related code.">
+              </mat-form-field>
+              <button mat-fab color="primary" aria-label="" class="mb-4 mx-3">
+                <span class="material-symbols-outlined">search</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 h-100 d-flex flex-column justify-content-center">
+      <img src="assets/hero.gif" alt="hero image" height="100%">
+    </div>
+  </div>
+</div>
+
+<p class="fixed-bottom text-center py-2 foot-note">&copy; All copy right reserved by Merlin</p>

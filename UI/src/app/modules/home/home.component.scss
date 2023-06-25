@@ -1,0 +1,32 @@
+@import "../../../variable";
+
+.brand {
+  .brand-logo{
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: $logo-font;
+    color: $primary-color;
+  }
+
+  .brand-title {
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+  }
+}
+
+.main-search {
+  max-width: 350px;
+}
+
+.brand-detail{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.main-link{
+  // font-size: 0.9rem;
+  text-transform: uppercase;
+  color: $sec-color;
+  display: flex;
+  align-items: center;
+}
