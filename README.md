@@ -1,7 +1,7 @@
 # Jovian GenAI Hackathon
 ## Steps to Get Started
 1) Run the following commands in the terminal
->  git clone 
+>  git clone https://github.com/anshumankmr/jovian-genai-hackathon
 2) Open the directory 
 3) Run 
 > cd server
