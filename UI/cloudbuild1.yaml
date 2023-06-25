@@ -6,6 +6,7 @@ steps:
         gcloud run deploy merlinapp --source . --region=asia-southeast2
         --max-instances=5
         --allow-unauthenticated
+        --port 4200
     entrypoint: /bin/bash
 options:
   logging: CLOUD_LOGGING_ONLY
