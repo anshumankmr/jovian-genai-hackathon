@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 server/Dockerfile.dockerfile
 server/.env
+UI/.firebase/
