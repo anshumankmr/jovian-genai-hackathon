@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HeaderComponent {
 
+  @Input() isSearchEnabled = true;
   queryText = new FormControl();
 
   constructor(public router: Router, public activatedRoute: ActivatedRoute) {}

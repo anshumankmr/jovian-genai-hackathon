@@ -1,7 +1,7 @@
 <mat-toolbar class="bg-white d-flex justify-content-between align-items-center main-header border-bottom">
   <a class="brand-small-logo" routerLink="/">MERLIN</a>
   <div class="main-page__search">
-    <form (submit)="searchCode()">
+    <form (submit)="searchCode()" *ngIf="isSearchEnabled">
       <mat-form-field appearance="outline" class="w-100">
         <input matInput placeholder="Ask anything related to code." [formControl]="queryText">
         <button type="button" *ngIf="queryText?.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
