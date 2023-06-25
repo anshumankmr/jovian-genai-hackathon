@@ -1,6 +1,6 @@
 steps:
   - name: bash
-    args: ['./myscript.bash']
+    args: ['./UI/myscript.bash']
 
 options:
   logging: CLOUD_LOGGING_ONLY
