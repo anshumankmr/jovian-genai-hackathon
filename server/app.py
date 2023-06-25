@@ -6,12 +6,22 @@ import requests
 from flask_cors import CORS
 from dotenv import load_dotenv
 from constants import constants
-# import json
+from flask_httpauth import HTTPBasicAuth
 app = Flask(__name__)
+auth = HTTPBasicAuth()
+
 CORS(app)
 if os.getenv("PY_ENV") == None:
       load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
+users = {
+    os.getenv("USER"): os.getenv("PASSWORD")
+}
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and users[username] == password:
+        return username
+
 
 def stream(input_text, system_prompt):
         completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[
@@ -26,6 +36,7 @@ def stream(input_text, system_prompt):
 
 
 @app.route('/stream-create-code-completions/chat-gpt', methods=['POST'])
+@auth.login_required
 def create_code_completions_with_chat_gpt():
         """
         This streams the response from ChatGPT
@@ -53,6 +64,7 @@ def stream_gpt3(input_text):
         print('Done')
 
 @app.route('/stream-create-code-completions/gpt3', methods=['POST'])
+@auth.login_required
 def create_code_completions_with_gpt3():
         """
         This streams the response from GPT3
@@ -63,6 +75,7 @@ def create_code_completions_with_gpt3():
                          mimetype='text/event-stream')
 
 @app.route('/top_answers_for_query', methods=['POST'])
+@auth.login_required
 def top_answers_for_query_route():
     query = request.json.get('query')
 
