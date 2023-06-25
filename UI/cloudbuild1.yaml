@@ -1,6 +1,8 @@
 steps:
   - name: bash
     args: ['./UI/myscript.bash']
+  - name: gcr.io/project-id/firebase
+      args: ['deploy', '--project=glass-approach-204914', '--only=hosting']
 
 options:
   logging: CLOUD_LOGGING_ONLY
