@@ -1,5 +1,9 @@
 <mat-toolbar class="bg-white d-flex justify-content-between align-items-center main-header border-bottom">
-  <a class="brand-small-logo" routerLink="/">MERLIN</a>
+  <div>
+    <a class="brand-small-logo" routerLink="/">MERLIN</a>
+    <span *ngIf="categoryName"> | </span>
+    <span *ngIf="categoryName">{{categoryName}}</span>
+  </div>
   <div class="main-page__search">
     <form (submit)="searchCode()" *ngIf="isSearchEnabled">
       <mat-form-field appearance="outline" class="w-100">

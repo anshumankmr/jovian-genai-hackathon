@@ -1,1 +1,42 @@
-<app-header [isSearchEnabled]="false"></app-header>
+<app-header [isSearchEnabled]="false" [categoryName]="'Unit Tests'"></app-header>
+
+<div class="container-fluid bg-light">
+  <div class="row">
+    <div class="col-12 col-lg-6 py-3">
+      <form (submit)="generateDoc()">
+        <mat-form-field class="w-100" appearance="outline">
+          <textarea class="code-area__input" rows="20" matInput placeholder="Paste your code" class="w-100" [formControl]="codeText"></textarea>
+        </mat-form-field>
+        <div class="d-flex justify-content-end my-2">
+          <button mat-flat-button color="primary" type="submit" class="generate-btn">GENERATE TEST CASE</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-lg-6">
+      <ng-container *ngIf="unitTestLoading === 'data' ">
+        <div *ngFor="let item of streamedData" class="mt-4 animate_animated animate_fadeIn">
+          <mat-card class="p-3 border">
+            <!-- <div [innerHTML]="item.replaceAll('\n', '&lt;br&gt;')"></div> -->
+            <markdown lineNumbers [start]="1">{{item}}</markdown>
+          </mat-card>
+        </div>
+      </ng-container>
+
+      <!-- Placeholder loading -->
+      <ng-container *ngIf="unitTestLoading === 'loading' && codeText.value">
+        <p class="card-text mt-4 placeholder-glow" *ngFor="let item of [1,2,3,4,5]">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+          <span class="placeholder col-8"></span>
+          <br><br>
+        </p>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
+
+<app-footer [isFixed]="false"></app-footer>
+

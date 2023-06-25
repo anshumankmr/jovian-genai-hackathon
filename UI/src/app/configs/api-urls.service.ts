@@ -21,6 +21,9 @@ export class ApiurlsService {
   sourcesUrl!: string;
   stackOverflowUrl!: string;
 
+  documentationUrl !: string;
+  testCaseUrl !: string;
+
   constructor() {
     this.loadUrls();
   }
@@ -30,5 +33,8 @@ export class ApiurlsService {
     this.searchUrl = `${this.baseUrl}${this.version}/llm`;
     this.sourcesUrl = `${this.googleBaseUrl}?key=${this.googleKey}&cx=${this.googleCx}&num=5`;
     this.stackOverflowUrl = `${this.baseUrl}/top_answers_for_query`;
+
+    this.documentationUrl = `${this.baseUrl}/stream-code-fixes/chatgpt`;
+    this.testCaseUrl = `${this.baseUrl}/stream-code-tests/chatgpt`;
   }
 }

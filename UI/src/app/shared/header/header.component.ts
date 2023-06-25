@@ -10,13 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HeaderComponent {
 
   @Input() isSearchEnabled = true;
+  @Input() categoryName = "";
   queryText = new FormControl();
 
   constructor(public router: Router, public activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
-      if (params["q"].length) {
+      if (params["q"]?.length) {
         this.queryText.setValue(decodeURIComponent(params["q"]));
       }
     });
