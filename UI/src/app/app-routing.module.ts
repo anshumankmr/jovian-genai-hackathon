@@ -21,7 +21,7 @@ const routes: Routes = [
     component: UnitTestComponent
   },
   {
-    path: "documentation",
+    path: "code-fixes",
     component: DocumentationComponent
   },
   {
