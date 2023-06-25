@@ -12,7 +12,7 @@ steps:
   - 'deploy'
   - 'merlinapp'
   - '--image'
-  - 'gcr.io/$PROJECT_ID/UI'
+  - 'gcr.io/$PROJECT_ID/merlin-app-ui'
   - '--region'
   - 'asia-southeast2'
   - '--platform'
