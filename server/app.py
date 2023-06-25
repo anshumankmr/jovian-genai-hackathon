@@ -62,6 +62,7 @@ def stream_gpt3(input_text):
                 resp += line['choices'][0]['text']
                 yield f'data: %s\n\n' % resp
         print('Done', resp)
+        yield "Done"
 
 @app.route('/stream-create-code-completions/gpt3', methods=['POST'])
 @auth.login_required
