@@ -1,14 +1,22 @@
-<mat-toolbar>
+<mat-toolbar class="d-flex justify-content-between align-items-center main-header border-bottom">
   <a class="brand-small-logo" routerLink="/">MERLIN</a>
-  <span class="header-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <span class="material-symbols-outlined">
-      favorite
-    </span>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <span class="material-symbols-outlined">
-      account_circle
-    </span>
-  </button>
+  <div class="main-page__search">
+    <form (submit)="searchCode()">
+      <mat-form-field appearance="outline" class="w-100">
+        <input matInput placeholder="Ask anything related code." [formControl]="queryText">
+      </mat-form-field>
+    </form>
+  </div>
+  <div>
+    <button mat-icon-button class="favorite-icon">
+      <span class="material-symbols-outlined">
+        favorite
+      </span>
+    </button>
+    <button mat-icon-button class="example-icon">
+      <span class="material-symbols-outlined">
+        account_circle
+      </span>
+    </button>
+  </div>
 </mat-toolbar>
