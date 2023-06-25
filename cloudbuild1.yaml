@@ -1,10 +1,11 @@
 steps:
-- name: gcr.io/cloud-builders/gcloud
+  - name: gcr.io/cloud-builders/gcloud
     args:
       - '-c'
       - >-
-        gcloud run deploy merlinapp --source ./UI/ --region=asia-southeast2
-        --max-instances=5 --allow-unauthenticated
-
+        gcloud run deploy merlinapp --source ./UI --region=asia-southeast2
+        --max-instances=5
+        --allow-unauthenticated
+    entrypoint: /bin/bash
 options:
   logging: CLOUD_LOGGING_ONLY
