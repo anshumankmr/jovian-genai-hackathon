@@ -33,6 +33,7 @@ def stream(input_text, system_prompt):
             if 'content' in line['choices'][0]['delta']:
                 resp += line['choices'][0]['delta']['content']
                 yield f'data: %s\n\n' % resp
+        print(resp)
 
 
 @app.route('/stream-create-code-completions/chat-gpt', methods=['POST'])
@@ -57,11 +58,10 @@ def stream_gpt3(input_text):
                     )
         resp = ''
         for line in completion:
-            print(line['choices'][0])
             if 'text' in line['choices'][0]:
                 resp += line['choices'][0]['text']
                 yield f'data: %s\n\n' % resp
-        print('Done')
+        print('Done', resp)
 
 @app.route('/stream-create-code-completions/gpt3', methods=['POST'])
 @auth.login_required
@@ -121,5 +121,27 @@ def advanced_search(query, num_results=1, sort='votes'):
     }
     response = requests.get(url, params=parameters)
     return response.json()['items'] if response.status_code == 200 and response.json()['items'] else None
+
+@app.route('/stream-code-tests/chatgpt', methods=['POST'])
+@auth.login_required
+def create_code_tests_with_chatgpt():
+        """
+        This streams the response from GPT3
+        """
+        prompt = request.get_json(force = True).get('prompt','')
+        prompt = f'You are a super smart developer using Test Driven Development to write tests according to a specification. Please generate tests based on the above specification. The tests should be as simple as possible, but still cover all the functionality. BEGIN Code: ${prompt}'
+        return Response(stream_with_context(stream(prompt,  constants["philosophy_prompt"] + constants["gen_code"])),
+                         mimetype='text/event-stream')
+
+@app.route('/stream-code-fixes/chatgpt', methods=['POST'])
+@auth.login_required
+def create_code_fixes_with_chatgpt():
+        """
+        This streams the response from GPT3
+        """
+        prompt = request.get_json(force = True).get('prompt','')
+        prompt = f'${constants["fix_code"]} BEGIN Code: ${prompt}'
+        return Response(stream_with_context(stream(prompt,  constants["philosophy_prompt"] + constants["gen_code"])),
+                         mimetype='text/event-stream')
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port = 8080, debug=True, threaded = True)
