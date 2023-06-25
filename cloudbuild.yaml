@@ -1,0 +1,15 @@
+steps:
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - '-c'
+      - "gcloud secrets versions access latest --secret=jovian-trigger\t --format='get(payload.data)' | tr '_-' '/+' | base64 -d > Dockerfile"
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - '-c'
+      - >-
+        gcloud run deploy jovian-backend --source . --region=asia-southeast2
+        --max-instances=5
+    entrypoint: /bin/bash
+options:
+  logging: CLOUD_LOGGING_ONLY
