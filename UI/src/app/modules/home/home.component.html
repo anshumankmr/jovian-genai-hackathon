@@ -22,10 +22,10 @@
             <div class="d-flex align-items-center">
               <mat-form-field appearance="outline" class="w-100">
                 <input matInput placeholder="Ask anything related to code." [formControl]="queryText">
+                <button matSuffix mat-icon-button aria-label="search" type="submit">
+                  <span class="material-symbols-outlined">search</span>
+                </button>
               </mat-form-field>
-              <button mat-fab color="primary" aria-label="" class="mb-4 mx-3">
-                <span class="material-symbols-outlined">search</span>
-              </button>
             </div>
           </form>
         </div>

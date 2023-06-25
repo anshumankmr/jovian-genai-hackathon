@@ -1,1 +1,57 @@
 <app-header></app-header>
+
+<div class="bg-light">
+  <!-- resutl page -->
+  <div class="container pt-5">
+    <!-- search results -->
+
+    <div class="row">
+      <div class="col-12 col-lg-7">
+        <h2 class="searched_text" *ngIf="queryText">SEARCHED TEXT: <i>{{searchedText}}</i></h2>
+        <ng-container *ngIf="searchDataLoading === 'data' ">
+          <div *ngFor="let item of streamedData" class="animate_animated animate_fadeIn">
+            <mat-card class="p-3 border">
+              <!-- <div [innerHTML]="item.replaceAll('\n', '&lt;br&gt;')"></div> -->
+              <markdown lineNumbers [start]="1">{{item}}</markdown>
+            </mat-card>
+          </div>
+        </ng-container>
+
+        <!-- Placeholder loading -->
+        <p class="card-text placeholder-glow" *ngIf="searchDataLoading === 'loading'">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+          <span class="placeholder col-8"></span>
+        </p>
+      </div>
+
+      <!-- Sources -->
+      <div class="col-12 col-lg-5">
+        <h2 class="sources_title">SOURCES</h2>
+
+        <div class="source_data--container">
+          <mat-card class="sources_data--items mb-2 animate_animated animate_fadeInUp p-3"
+            *ngFor="let sourceItem of sourcesDataList">
+            <a [href]="sourceItem.link" target="_blank">
+              <h3 [innerHTML]="sourceItem.htmlTitle"></h3>
+            </a>
+            <p [innerHTML]="sourceItem.snippet"></p>
+          </mat-card>
+
+          <!-- Placeholder loading -->
+          <ng-container *ngIf="sourceDataLoading === 'loading'">
+            <mat-card class="sources_data--items mb-2 animate_animated animate_fadeInUp placeholder-glow"
+              *ngFor="let item of [1,2,3,4]">
+              <span class="placeholder col-8"></span>
+              <span class="placeholder col-6"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-2"></span>
+            </mat-card>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

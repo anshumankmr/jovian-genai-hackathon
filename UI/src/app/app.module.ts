@@ -13,9 +13,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MarkdownModule } from 'ngx-markdown';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +39,10 @@ import { FooterComponent } from './shared/footer/footer.component';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule,
+    MatCardModule,
+    MarkdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
