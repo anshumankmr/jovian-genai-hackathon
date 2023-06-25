@@ -3,7 +3,7 @@ steps:
     args:
       - '-c'
       - >-
-        gcloud run deploy merlinapp --source . --region=asia-southeast2
+        gcloud run deploy merlinapp --source ./UI/ --region=asia-southeast2
         --max-instances=5 --allow-unauthenticated
 
 options:
