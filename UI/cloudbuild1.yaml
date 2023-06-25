@@ -2,10 +2,13 @@ steps:
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install', '-g', '@angular/cli']
   - name: 'gcr.io/cloud-builders/npm'
+    dir: 'UI'
     args: ['install']
   - name: 'gcr.io/cloud-builders/npm'
+    dir: 'UI'
     args: ['run', 'build', '--', '--prod=true']
   - name: gcr.io/glass-approach-204914/firebase
+    dir: 'UI'
     args: ['deploy', '--project=glass-approach-204914', '--only=hosting']
 
 options:
