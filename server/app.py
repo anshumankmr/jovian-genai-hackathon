@@ -62,4 +62,4 @@ def create_code_completions_with_gpt3():
         return Response(stream_with_context(stream_gpt3(prompt)),
                          mimetype='text/event-stream')
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True, threaded = True)
+    app.run(host="0.0.0.0", port = 8080, debug=True, threaded = True)
