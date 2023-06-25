@@ -1,5 +1,5 @@
 # Write a simple flask app with one route to return an response from OpenAI's Gpt3.5 turbo model using the completions API
-from flask  import Flask, Response, stream_with_context, request
+from flask  import Flask, Response, stream_with_context, request,jsonify
 import os
 import openai
 import requests
@@ -61,5 +61,52 @@ def create_code_completions_with_gpt3():
         prompt = f'Please Note These Are the Instructions You Must Always Follow: {constants["gpt3_coding_prompt"]}. Now here\'s the question: {prompt}'
         return Response(stream_with_context(stream_gpt3(prompt)),
                          mimetype='text/event-stream')
+
+@app.route('/top_answers_for_query', methods=['POST'])
+def top_answers_for_query_route():
+    query = request.json.get('query')
+
+    if not query:
+        return jsonify({'error': 'Missing query parameter'}), 400
+
+    questions = advanced_search(query, 3)
+
+    if not questions:
+        return jsonify({'error': 'No questions found for this query'}), 404
+
+    # Get most upvoted answer for each question
+    top_answers = []
+    for question in questions:
+        answer = get_most_upvoted_answer(question['question_id'])
+        if answer:
+            answer['question_title'] = question['title']
+            top_answers.append(answer)
+
+    return jsonify(top_answers)
+
+def get_most_upvoted_answer(question_id):
+    url = f"https://api.stackexchange.com/2.2/questions/{question_id}/answers"
+    parameters = {
+        "order": "desc",
+        "sort": "votes",
+        "site": "stackoverflow",
+        "pagesize": 1,
+        "filter": "withbody"
+    }
+    response = requests.get(url, params=parameters)
+    return response.json()['items'][0] if response.status_code == 200 and response.json()['items'] else None
+
+def advanced_search(query, num_results=1, sort='votes'):
+    url = "https://api.stackexchange.com/2.2/search/advanced"
+    parameters = {
+        "order": "desc",
+        "sort": sort,
+        "q": query,
+        "site": "stackoverflow",
+        "pagesize": num_results,
+        "filter": "withbody"
+    }
+    response = requests.get(url, params=parameters)
+    return response.json()['items'] if response.status_code == 200 and response.json()['items'] else None
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port = 8080, debug=True, threaded = True)
