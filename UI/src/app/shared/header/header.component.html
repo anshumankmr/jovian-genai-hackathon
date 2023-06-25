@@ -4,6 +4,11 @@
     <form (submit)="searchCode()">
       <mat-form-field appearance="outline" class="w-100">
         <input matInput placeholder="Ask anything related code." [formControl]="queryText">
+        <button type="button" *ngIf="queryText?.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+          <span class="material-symbols-outlined">
+            close
+          </span>
+        </button>
       </mat-form-field>
     </form>
   </div>
