@@ -6,7 +6,7 @@ steps:
     args: ['install']
   - name: 'gcr.io/cloud-builders/npm'
     dir: 'UI'
-    args: ['run', 'build', '--', '--prod=true']
+    args: ['run', 'build', '--']
   - name: gcr.io/glass-approach-204914/firebase
     dir: 'UI'
     args: ['deploy', '--project=glass-approach-204914', '--only=hosting']
