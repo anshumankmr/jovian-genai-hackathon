@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build  --named-chunks --verbose --build-optimizer=false --source-map",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
